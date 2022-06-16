@@ -739,8 +739,10 @@ bot.action('darkknight', ctx => {
 })
 
 bot.action('stats', ctx =>{
-    bot.telegram.sendMessage(ctx.chat.id, 'Набраних балів: ' + balls)
-}) 
+    bot.telegram.sendMessage(ctx.chat.id, 'Набраних балів: ' + balls).then((result) => {
+        msgForDelete.push(result.message_id);//додаємо id повідомлення, яке потрібно видалити
+    });
+})
 
 bot.launch();
 
