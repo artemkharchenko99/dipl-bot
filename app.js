@@ -14,7 +14,21 @@ bot.command('help', ctx => {
 })
 bot.command('stats', ctx => {
     console.log(ctx.from)
-    bot.telegram.sendMessage(ctx.chat.id, 'Набраних балів: ' + balls)
+    bot.telegram.sendMessage(ctx.chat.id, 'Набраних балів: ' + balls, {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Закрити",
+                    callback_data: 'close'
+                }]
+            ],
+        }
+    });
+})
+
+bot.action('close', ctx => {
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
 })
 
 bot.hears('play', ctx => {
@@ -107,7 +121,7 @@ bot.action('question1', async ctx => {
                 ],
          }
         })
-        dltMessages(ctx) //виклик функції видалення
+    dltMessages(ctx) //виклик функції видалення
     msgForDelete = []
     })
     bot.action('forest', ctx => {
@@ -126,7 +140,7 @@ bot.action('question1', async ctx => {
                 ],
          }
         })
-        dltMessages(ctx) //виклик функції видалення
+    dltMessages(ctx) //виклик функції видалення
     msgForDelete = []
     })
     bot.action('mile', ctx => {
@@ -145,7 +159,7 @@ bot.action('question1', async ctx => {
                 ],
          }
         })
-        dltMessages(ctx) //виклик функції видалення
+    dltMessages(ctx) //виклик функції видалення
     msgForDelete = []
     })
     bot.action('old', ctx => {
@@ -164,7 +178,7 @@ bot.action('question1', async ctx => {
                 ],
          }
         })
-        dltMessages(ctx) //виклик функції видалення
+    dltMessages(ctx) //виклик функції видалення
     msgForDelete = []
     })
 
