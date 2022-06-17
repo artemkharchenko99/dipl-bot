@@ -20,7 +20,12 @@ bot.command('stats', ctx => {
                 [{
                     text: "Закрити",
                     callback_data: 'close'
+                }],
+                [{
+                    text: "Обнулити статистику",
+                    callback_data: 'reset'
                 }]
+
             ],
         }
     });
@@ -30,6 +35,13 @@ bot.action('close', ctx => {
     dltMessages(ctx) //виклик функції видалення
     msgForDelete = []
 })
+
+bot.action('reset', ctx => {
+    balls = 0
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+
 
 bot.hears('play', ctx => {
     console.log(ctx.from)
@@ -681,8 +693,8 @@ bot.action('venom', ctx => {
         reply_markup: {
             inline_keyboard: [
                 [{
-                    text: "Зіграти у вікторину ще раз \ud83d\udd01",
-                    callback_data: 'question1'
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question7'
                 }],
                 [{
                     text: "Статистика \ud83d\udcca",
@@ -700,8 +712,8 @@ bot.action('spiderman', ctx => {
         reply_markup: {
             inline_keyboard: [
                 [{
-                    text: "Зіграти у вікторину ще раз \ud83d\udd01",
-                    callback_data: 'question1'
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question7'
                 }],
                 [{
                     text: "Статистика \ud83d\udcca",
@@ -719,8 +731,8 @@ bot.action('avengers', ctx => {
         reply_markup: {
             inline_keyboard: [
                 [{
-                    text: "Зіграти у вікторину ще раз \ud83d\udd01",
-                    callback_data: 'question1'
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question7'
                 }],
                 [{
                     text: "Статистика \ud83d\udcca",
@@ -735,6 +747,690 @@ bot.action('avengers', ctx => {
 bot.action('darkknight', ctx => {
 	balls =  balls - 2;
     bot.telegram.sendMessage(ctx.chat.id, '\u274c Помилка, спробуй ще раз (-2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question7'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+
+bot.action('question7',  async ctx => {
+    dltMessages(ctx)//виклик функції видалення
+    msgForDelete = []
+    bot.telegram.sendMessage(ctx.chat.id, 'Із якого фільму прикріплений кадр?').then((result) => {
+        msgForDelete.push(result.message_id);//додаємо id повідомлення, яке потрібно видалити
+    });
+    bot.telegram.sendPhoto(ctx.chat.id, {
+        source: "res/frame7.png"
+    }).then((result) => {
+        msgForDelete.push(result.message_id);//додаємо id повідомлення, яке потрібно видалити
+    });
+    let choiceMessage = 'Зробіть вибір:';
+    await waitFor(1500);
+    await bot.telegram.sendMessage(ctx.chat.id, choiceMessage, {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Пролетая гад гнездом кукушки",
+                    callback_data: 'kuku'
+                },
+                {
+                    text: "Сияние",
+                    callback_data: 'shine'
+                }],
+                [{
+                    text: "Начало",
+                    callback_data: 'start'
+                },
+                {
+                    text: "Арахисовый сокол",
+                    callback_data: 'sokol'
+                }],
+            ],
+     }
+})
+})
+
+bot.action('kuku', ctx => {
+	balls =  balls + 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u2705 Вітаю! Це правильна відповідь (+2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question8'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+bot.action('shine', ctx => {
+	balls =  balls - 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u274c Невірно (-2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question8'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+bot.action('start', ctx => {
+	balls =  balls - 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u274c Невірно (-2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question8'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+bot.action('sokol', ctx => {
+	balls =  balls - 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u274c Невірно (-2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question8'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+
+bot.action('question8',  async ctx => {
+    dltMessages(ctx)//виклик функції видалення
+    msgForDelete = []
+    bot.telegram.sendMessage(ctx.chat.id, 'Із якого фільму прикріплений кадр?').then((result) => {
+        msgForDelete.push(result.message_id);//додаємо id повідомлення, яке потрібно видалити
+    });
+    bot.telegram.sendPhoto(ctx.chat.id, {
+        source: "res/frame8.png"
+    }).then((result) => {
+        msgForDelete.push(result.message_id);//додаємо id повідомлення, яке потрібно видалити
+    });
+    let choiceMessage = 'Зробіть вибір:';
+    await waitFor(1500);
+    await bot.telegram.sendMessage(ctx.chat.id, choiceMessage, {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Лабиринт Фавна",
+                    callback_data: 'favn'
+                },
+                {
+                    text: "Отступники",
+                    callback_data: 'otst'
+                }],
+                [{
+                    text: "Гран Торино",
+                    callback_data: 'gran'
+                },
+                {
+                    text: "Джокер",
+                    callback_data: 'joker'
+                }],
+            ],
+     }
+})
+})
+
+bot.action('favn', ctx => {
+	balls =  balls - 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u274c Невірно (-2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question9'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+bot.action('otst', ctx => {
+	balls =  balls - 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u274c Невірно (-2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question9'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+bot.action('gran', ctx => {
+	balls =  balls + 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u2705 Вітаю! Це правильна відповідь (+2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question9'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+bot.action('joker', ctx => {
+	balls =  balls - 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u274c Невірно (-2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question9'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+
+bot.action('question9',  async ctx => {
+    dltMessages(ctx)//виклик функції видалення
+    msgForDelete = []
+    bot.telegram.sendMessage(ctx.chat.id, 'Із якого фільму прикріплений кадр?').then((result) => {
+        msgForDelete.push(result.message_id);//додаємо id повідомлення, яке потрібно видалити
+    });
+    bot.telegram.sendPhoto(ctx.chat.id, {
+        source: "res/frame9.png"
+    }).then((result) => {
+        msgForDelete.push(result.message_id);//додаємо id повідомлення, яке потрібно видалити
+    });
+    let choiceMessage = 'Зробіть вибір:';
+    await waitFor(1500);
+    await bot.telegram.sendMessage(ctx.chat.id, choiceMessage, {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Крупная рыба",
+                    callback_data: 'bigfish'
+                },
+                {
+                    text: "Старикам тут не место",
+                    callback_data: 'nemesto'
+                }],
+                [{
+                    text: "Неоновый демон",
+                    callback_data: 'neon'
+                },
+                {
+                    text: "После прочтения сжечь",
+                    callback_data: 'burn'
+                }],
+            ],
+     }
+})
+})
+
+bot.action('bigfish', ctx => {
+	balls =  balls - 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u274c Невірно (-2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question10'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+bot.action('nemesto', ctx => {
+	balls =  balls + 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u2705 Вітаю! Це правильна відповідь (+2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question10'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+bot.action('neon', ctx => {
+	balls =  balls - 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u274c Невірно (-2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question10'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+bot.action('burn', ctx => {
+	balls =  balls - 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u274c Невірно (-2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question10'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+
+bot.action('question10',  async ctx => {
+    dltMessages(ctx)//виклик функції видалення
+    msgForDelete = []
+    bot.telegram.sendMessage(ctx.chat.id, 'Із якого фільму прикріплений кадр?').then((result) => {
+        msgForDelete.push(result.message_id);//додаємо id повідомлення, яке потрібно видалити
+    });
+    bot.telegram.sendPhoto(ctx.chat.id, {
+        source: "res/frame10.png"
+    }).then((result) => {
+        msgForDelete.push(result.message_id);//додаємо id повідомлення, яке потрібно видалити
+    });
+    let choiceMessage = 'Зробіть вибір:';
+    await waitFor(1500);
+    await bot.telegram.sendMessage(ctx.chat.id, choiceMessage, {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Поймай меня, если сможешь",
+                    callback_data: 'catchme'
+                },
+                {
+                    text: "Кролик Джоджо",
+                    callback_data: 'jojo'
+                }],
+                [{
+                    text: "Доказательство смерти",
+                    callback_data: 'dokazdead'
+                },
+                {
+                    text: "Один дома",
+                    callback_data: 'alonehome'
+                }],
+            ],
+     }
+})
+})
+
+bot.action('catchme', ctx => {
+	balls =  balls + 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u2705 Вітаю! Це правильна відповідь (+2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question11'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+bot.action('jojo', ctx => {
+	balls =  balls - 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u274c Невірно (-2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question11'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+bot.action('dokazdead', ctx => {
+	balls =  balls - 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u274c Невірно (-2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question11'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+bot.action('alonehome', ctx => {
+	balls =  balls - 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u274c Невірно (-2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question11'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+
+bot.action('question11',  async ctx => {
+    dltMessages(ctx)//виклик функції видалення
+    msgForDelete = []
+    bot.telegram.sendMessage(ctx.chat.id, 'Із якого фільму прикріплений кадр?').then((result) => {
+        msgForDelete.push(result.message_id);//додаємо id повідомлення, яке потрібно видалити
+    });
+    bot.telegram.sendPhoto(ctx.chat.id, {
+        source: "res/frame11.png"
+    }).then((result) => {
+        msgForDelete.push(result.message_id);//додаємо id повідомлення, яке потрібно видалити
+    });
+    let choiceMessage = 'Зробіть вибір:';
+    await waitFor(1500);
+    await bot.telegram.sendMessage(ctx.chat.id, choiceMessage, {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Одарённая",
+                    callback_data: 'odar'
+                },
+                {
+                    text: "Ford против Ferrari",
+                    callback_data: 'fordvsferrari'
+                }],
+                [{
+                    text: "Костяной томагавк",
+                    callback_data: 'bonetomahawk'
+                },
+                {
+                    text: "Брюс Всемогущий",
+                    callback_data: 'Brus'
+                }],
+            ],
+     }
+})
+})
+
+bot.action('odar', ctx => {
+	balls =  balls - 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u274c Невірно (-2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question12'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+bot.action('fordvsferrari', ctx => {
+	balls =  balls - 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u274c Невірно (-2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question12'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+bot.action('bonetomahawk', ctx => {
+	balls =  balls - 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u274c Невірно (-2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question12'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+bot.action('Brus', ctx => {
+	balls =  balls + 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u2705 Вітаю! Це правильна відповідь (+2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Наступне питання \u27a1\ufe0f",
+                    callback_data: 'question12'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+
+bot.action('question12',  async ctx => {
+    dltMessages(ctx)//виклик функції видалення
+    msgForDelete = []
+    bot.telegram.sendMessage(ctx.chat.id, 'Із якого фільму прикріплений кадр?').then((result) => {
+        msgForDelete.push(result.message_id);//додаємо id повідомлення, яке потрібно видалити
+    });
+    bot.telegram.sendPhoto(ctx.chat.id, {
+        source: "res/frame12.png"
+    }).then((result) => {
+        msgForDelete.push(result.message_id);//додаємо id повідомлення, яке потрібно видалити
+    });
+    let choiceMessage = 'Зробіть вибір:';
+    await waitFor(1500);
+    await bot.telegram.sendMessage(ctx.chat.id, choiceMessage, {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Молчание ягнят",
+                    callback_data: 'molch'
+                },
+                {
+                    text: "Американский психопат",
+                    callback_data: 'amerpsyc'
+                }],
+                [{
+                    text: "Четыре  комнаты",
+                    callback_data: 'fourrooms'
+                },
+                {
+                    text: "Монстро",
+                    callback_data: 'monstro'
+                }],
+            ],
+     }
+})
+})
+
+bot.action('molch', ctx => {
+	balls =  balls - 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u274c Невірно (-2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Зіграти у вікторину ще раз \ud83d\udd01",
+                    callback_data: 'question1'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+bot.action('amerpsyc', ctx => {
+	balls =  balls + 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u2705 Вітаю! Це правильна відповідь (+2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Зіграти у вікторину ще раз \ud83d\udd01",
+                    callback_data: 'question1'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+bot.action('fourrooms', ctx => {
+	balls =  balls - 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u274c Невірно (-2 бали)', {
+        reply_markup: {
+            inline_keyboard: [
+                [{
+                    text: "Зіграти у вікторину ще раз \ud83d\udd01",
+                    callback_data: 'question1'
+                }],
+                [{
+                    text: "Статистика \ud83d\udcca",
+                    callback_data: 'stats'
+                }]
+            ],
+     }
+    })
+    dltMessages(ctx) //виклик функції видалення
+    msgForDelete = []
+})
+bot.action('monstro', ctx => {
+	balls =  balls - 2;
+    bot.telegram.sendMessage(ctx.chat.id, '\u274c Невірно (-2 бали)', {
         reply_markup: {
             inline_keyboard: [
                 [{
